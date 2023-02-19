@@ -11,12 +11,12 @@ using System.Collections.Generic;
 using System.Xml.Linq;
 
 namespace DocumentMenu {
-    public sealed class DocumentManager {
-        private static readonly DocumentManager instance = new DocumentManager();
+    public sealed class DocumentWork {
+        private static readonly DocumentWork instance = new DocumentWork();
         private List<Document> documents = new List<Document>();
-        private DocumentManager() { }
+        private DocumentWork() { }
 
-        public static DocumentManager Instance {
+        public static DocumentWork Instance {
             get { return instance; }
         }
 
@@ -114,7 +114,7 @@ namespace DocumentMenu {
         private void ListAllDocumentsMenu() {
             Console.WriteLine(" показать список док-в:");
             foreach(Document doc in documents) {
-                Console.WriteLine(doc.GetInfo());
+                Console.WriteLine(doc.Info());
             }
         }
     }
@@ -131,13 +131,13 @@ namespace DocumentMenu {
             Subject = subject;
             FilePath = filePath;
         }
-        public abstract string GetInfo();
+        public abstract string Info();
     }
     public class MSWordDocument : Document {
         public MSWordDocument(string name, string author, string[] keywords, string subject, string filePath)
             : base(name, author, keywords, subject, filePath) {
         }
-        public override string GetInfo() {
+        public override string Info() {
             return $" MS Word док-т - {Name}. автор - {Author}. ключевые слова - {string.Join(",", Keywords)}. тема - {Subject}. путь файла - {FilePath}";
         }
     }
@@ -146,7 +146,7 @@ namespace DocumentMenu {
         public PDFDocument(string name, string author, string[] keywords, string subject, string filePath)
             : base(name, author, keywords, subject, filePath) {
         }
-        public override string GetInfo() {
+        public override string Info() {
             return $" PDF док-т - {Name}. автор - {Author}. ключевые слова - {string.Join(",", Keywords)}. тема - {Subject}. путь файла - {FilePath}";
         }
     }
@@ -155,7 +155,7 @@ namespace DocumentMenu {
         public MSExcelDocument(string name, string author, string[] keywords, string subject, string filePath)
             : base(name, author, keywords, subject, filePath) {
         }
-        public override string GetInfo() {
+        public override string Info() {
             return $" MS Excel док-т - {Name}. автор - {Author}. ключевые слова - {string.Join(",", Keywords)}. тема - {Subject}. путь файла - {FilePath}";
         }
     }
@@ -164,7 +164,7 @@ namespace DocumentMenu {
         public TXTDocument(string name, string author, string[] keywords, string subject, string filePath)
             : base(name, author, keywords, subject, filePath) {
         }
-        public override string GetInfo() {
+        public override string Info() {
             return $" TXT док-т - {Name}. автор - {Author}. ключевые слова - {string.Join(",", Keywords)}. тема - {Subject}. путь файла - {FilePath}";
         }
     }
@@ -173,13 +173,13 @@ namespace DocumentMenu {
         public HTMLDocument(string name, string author, string[] keywords, string subject, string filePath)
             : base(name, author, keywords, subject, filePath) {
         }
-        public override string GetInfo() {
+        public override string Info() {
             return $" HTML док-т - {Name}. автор - {Author}. ключевые слова - {string.Join(",", Keywords)}. тема - {Subject}. путь файла - {FilePath}";
         }
     }
     class Program {
         static void Main(string[] args) {
-            DocumentManager docManager = DocumentManager.Instance;
+            DocumentWork docManager = DocumentWork.Instance;
             docManager.Menu();
         }
     }
